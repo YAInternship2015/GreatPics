@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F8EA4D6F3394249AF7563D0 /* libPods-GreatPics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB8205A5D80569858B236E8 /* libPods-GreatPics.a */; };
 		80D60A731BBC4DDD00C3310E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A721BBC4DDD00C3310E /* main.m */; };
 		80D60A761BBC4DDD00C3310E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A751BBC4DDD00C3310E /* AppDelegate.m */; };
 		80D60A791BBC4DDD00C3310E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A781BBC4DDD00C3310E /* ViewController.m */; };
 		80D60A7C1BBC4DDD00C3310E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80D60A7A1BBC4DDD00C3310E /* Main.storyboard */; };
 		80D60A7E1BBC4DDD00C3310E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D60A7D1BBC4DDD00C3310E /* Assets.xcassets */; };
 		80D60A811BBC4DDD00C3310E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80D60A7F1BBC4DDD00C3310E /* LaunchScreen.storyboard */; };
+		80D60A891BBC4FB500C3310E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 80D60A881BBC4FB500C3310E /* .gitignore */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1AB8205A5D80569858B236E8 /* libPods-GreatPics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GreatPics.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CB8296918332F8EF5EFE0F8 /* Pods-GreatPics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatPics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GreatPics/Pods-GreatPics.debug.xcconfig"; sourceTree = "<group>"; };
 		80D60A6E1BBC4DDD00C3310E /* GreatPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreatPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80D60A721BBC4DDD00C3310E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		80D60A741BBC4DDD00C3310E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -26,6 +30,8 @@
 		80D60A7D1BBC4DDD00C3310E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D60A801BBC4DDD00C3310E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		80D60A821BBC4DDD00C3310E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80D60A881BBC4FB500C3310E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
+		EB7B32DF2FE679F0E55E0AD5 /* Pods-GreatPics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatPics.release.xcconfig"; path = "Pods/Target Support Files/Pods-GreatPics/Pods-GreatPics.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F8EA4D6F3394249AF7563D0 /* libPods-GreatPics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +51,8 @@
 			children = (
 				80D60A701BBC4DDD00C3310E /* GreatPics */,
 				80D60A6F1BBC4DDD00C3310E /* Products */,
+				FF391E4F40F796DB4CAC8793 /* Pods */,
+				BF8C529ECBD0F7AAB50E7E3D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,9 +83,27 @@
 		80D60A711BBC4DDD00C3310E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				80D60A881BBC4FB500C3310E /* .gitignore */,
 				80D60A721BBC4DDD00C3310E /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF8C529ECBD0F7AAB50E7E3D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1AB8205A5D80569858B236E8 /* libPods-GreatPics.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF391E4F40F796DB4CAC8793 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3CB8296918332F8EF5EFE0F8 /* Pods-GreatPics.debug.xcconfig */,
+				EB7B32DF2FE679F0E55E0AD5 /* Pods-GreatPics.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,9 +113,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 80D60A851BBC4DDD00C3310E /* Build configuration list for PBXNativeTarget "GreatPics" */;
 			buildPhases = (
+				3B924D8C70FEE34AC5FB8EA1 /* Check Pods Manifest.lock */,
 				80D60A6A1BBC4DDD00C3310E /* Sources */,
 				80D60A6B1BBC4DDD00C3310E /* Frameworks */,
 				80D60A6C1BBC4DDD00C3310E /* Resources */,
+				9BF8CC79918E8381906C35FD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -136,6 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80D60A891BBC4FB500C3310E /* .gitignore in Resources */,
 				80D60A811BBC4DDD00C3310E /* LaunchScreen.storyboard in Resources */,
 				80D60A7E1BBC4DDD00C3310E /* Assets.xcassets in Resources */,
 				80D60A7C1BBC4DDD00C3310E /* Main.storyboard in Resources */,
@@ -143,6 +173,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B924D8C70FEE34AC5FB8EA1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9BF8CC79918E8381906C35FD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GreatPics/Pods-GreatPics-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		80D60A6A1BBC4DDD00C3310E /* Sources */ = {
@@ -261,6 +324,7 @@
 		};
 		80D60A861BBC4DDD00C3310E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CB8296918332F8EF5EFE0F8 /* Pods-GreatPics.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GreatPics/Info.plist;
@@ -272,6 +336,7 @@
 		};
 		80D60A871BBC4DDD00C3310E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB7B32DF2FE679F0E55E0AD5 /* Pods-GreatPics.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GreatPics/Info.plist;
@@ -300,6 +365,7 @@
 				80D60A871BBC4DDD00C3310E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
