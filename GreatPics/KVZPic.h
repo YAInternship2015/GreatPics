@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  KVZDataModel.h
 //  GreatPics
 //
 //  Created by kateryna.zaikina on 9/30/15.
 //  Copyright © 2015 kateryna.zaikina. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface ViewController : UIViewController
-
+@interface KVZPic : NSObject
 
 @end
-

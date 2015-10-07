@@ -10,11 +10,20 @@
 		2F8EA4D6F3394249AF7563D0 /* libPods-GreatPics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB8205A5D80569858B236E8 /* libPods-GreatPics.a */; };
 		80D60A731BBC4DDD00C3310E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A721BBC4DDD00C3310E /* main.m */; };
 		80D60A761BBC4DDD00C3310E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A751BBC4DDD00C3310E /* AppDelegate.m */; };
-		80D60A791BBC4DDD00C3310E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A781BBC4DDD00C3310E /* ViewController.m */; };
+		80D60A791BBC4DDD00C3310E /* KVZCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A781BBC4DDD00C3310E /* KVZCollectionViewController.m */; };
 		80D60A7C1BBC4DDD00C3310E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80D60A7A1BBC4DDD00C3310E /* Main.storyboard */; };
 		80D60A7E1BBC4DDD00C3310E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D60A7D1BBC4DDD00C3310E /* Assets.xcassets */; };
 		80D60A811BBC4DDD00C3310E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80D60A7F1BBC4DDD00C3310E /* LaunchScreen.storyboard */; };
 		80D60A891BBC4FB500C3310E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 80D60A881BBC4FB500C3310E /* .gitignore */; settings = {ASSET_TAGS = (); }; };
+		80D60A8C1BBC633300C3310E /* KVZDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A8B1BBC633300C3310E /* KVZDataSource.m */; settings = {ASSET_TAGS = (); }; };
+		80D60A8F1BBC638E00C3310E /* KVZCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A8E1BBC638E00C3310E /* KVZCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		80D60A921BBC673400C3310E /* KVZPic.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A911BBC673400C3310E /* KVZPic.m */; settings = {ASSET_TAGS = (); }; };
+		80D60A951BBC694F00C3310E /* KVZServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A941BBC694F00C3310E /* KVZServerManager.m */; settings = {ASSET_TAGS = (); }; };
+		80D60A981BBE8C1A00C3310E /* KVZLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A971BBE8C1A00C3310E /* KVZLoginViewController.m */; settings = {ASSET_TAGS = (); }; };
+		80D60AE81BC4528400C3310E /* KVZCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60AE71BC4528400C3310E /* KVZCoreDataManager.m */; settings = {ASSET_TAGS = (); }; };
+		80D60AEE1BC4596700C3310E /* KVZModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80D60AEC1BC4596700C3310E /* KVZModel.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		80D60AF31BC461E000C3310E /* KVZInstaPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60AF01BC461E000C3310E /* KVZInstaPost+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		80D60AF41BC461E000C3310E /* KVZInstaPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60AF21BC461E000C3310E /* KVZInstaPost.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,13 +33,30 @@
 		80D60A721BBC4DDD00C3310E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		80D60A741BBC4DDD00C3310E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		80D60A751BBC4DDD00C3310E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		80D60A771BBC4DDD00C3310E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		80D60A781BBC4DDD00C3310E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		80D60A771BBC4DDD00C3310E /* KVZCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVZCollectionViewController.h; sourceTree = "<group>"; };
+		80D60A781BBC4DDD00C3310E /* KVZCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVZCollectionViewController.m; sourceTree = "<group>"; };
 		80D60A7B1BBC4DDD00C3310E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		80D60A7D1BBC4DDD00C3310E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D60A801BBC4DDD00C3310E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		80D60A821BBC4DDD00C3310E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80D60A881BBC4FB500C3310E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
+		80D60A8A1BBC633300C3310E /* KVZDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVZDataSource.h; sourceTree = "<group>"; };
+		80D60A8B1BBC633300C3310E /* KVZDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVZDataSource.m; sourceTree = "<group>"; };
+		80D60A8D1BBC638E00C3310E /* KVZCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVZCollectionViewCell.h; sourceTree = "<group>"; };
+		80D60A8E1BBC638E00C3310E /* KVZCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVZCollectionViewCell.m; sourceTree = "<group>"; };
+		80D60A901BBC673400C3310E /* KVZPic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVZPic.h; sourceTree = "<group>"; };
+		80D60A911BBC673400C3310E /* KVZPic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVZPic.m; sourceTree = "<group>"; };
+		80D60A931BBC694F00C3310E /* KVZServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVZServerManager.h; sourceTree = "<group>"; };
+		80D60A941BBC694F00C3310E /* KVZServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVZServerManager.m; sourceTree = "<group>"; };
+		80D60A961BBE8C1A00C3310E /* KVZLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVZLoginViewController.h; sourceTree = "<group>"; };
+		80D60A971BBE8C1A00C3310E /* KVZLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVZLoginViewController.m; sourceTree = "<group>"; };
+		80D60AE61BC4528400C3310E /* KVZCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVZCoreDataManager.h; sourceTree = "<group>"; };
+		80D60AE71BC4528400C3310E /* KVZCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVZCoreDataManager.m; sourceTree = "<group>"; };
+		80D60AED1BC4596700C3310E /* KVZModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KVZModel.xcdatamodel; sourceTree = "<group>"; };
+		80D60AEF1BC461E000C3310E /* KVZInstaPost+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KVZInstaPost+CoreDataProperties.h"; sourceTree = "<group>"; };
+		80D60AF01BC461E000C3310E /* KVZInstaPost+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KVZInstaPost+CoreDataProperties.m"; sourceTree = "<group>"; };
+		80D60AF11BC461E000C3310E /* KVZInstaPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVZInstaPost.h; sourceTree = "<group>"; };
+		80D60AF21BC461E000C3310E /* KVZInstaPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVZInstaPost.m; sourceTree = "<group>"; };
 		EB7B32DF2FE679F0E55E0AD5 /* Pods-GreatPics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatPics.release.xcconfig"; path = "Pods/Target Support Files/Pods-GreatPics/Pods-GreatPics.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,14 +93,11 @@
 		80D60A701BBC4DDD00C3310E /* GreatPics */ = {
 			isa = PBXGroup;
 			children = (
-				80D60A741BBC4DDD00C3310E /* AppDelegate.h */,
-				80D60A751BBC4DDD00C3310E /* AppDelegate.m */,
-				80D60A771BBC4DDD00C3310E /* ViewController.h */,
-				80D60A781BBC4DDD00C3310E /* ViewController.m */,
+				80D60A9C1BBE8D5E00C3310E /* Models */,
+				80D60A9D1BBE8D6800C3310E /* Controllers */,
+				80D60A9E1BBE8D7500C3310E /* Views */,
+				80D60A9F1BBE8D7D00C3310E /* Server */,
 				80D60A7A1BBC4DDD00C3310E /* Main.storyboard */,
-				80D60A7D1BBC4DDD00C3310E /* Assets.xcassets */,
-				80D60A7F1BBC4DDD00C3310E /* LaunchScreen.storyboard */,
-				80D60A821BBC4DDD00C3310E /* Info.plist */,
 				80D60A711BBC4DDD00C3310E /* Supporting Files */,
 			);
 			path = GreatPics;
@@ -83,10 +106,62 @@
 		80D60A711BBC4DDD00C3310E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				80D60A741BBC4DDD00C3310E /* AppDelegate.h */,
+				80D60A751BBC4DDD00C3310E /* AppDelegate.m */,
+				80D60A7D1BBC4DDD00C3310E /* Assets.xcassets */,
+				80D60A7F1BBC4DDD00C3310E /* LaunchScreen.storyboard */,
 				80D60A881BBC4FB500C3310E /* .gitignore */,
+				80D60A821BBC4DDD00C3310E /* Info.plist */,
 				80D60A721BBC4DDD00C3310E /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		80D60A9C1BBE8D5E00C3310E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				80D60A8A1BBC633300C3310E /* KVZDataSource.h */,
+				80D60A8B1BBC633300C3310E /* KVZDataSource.m */,
+				80D60AE61BC4528400C3310E /* KVZCoreDataManager.h */,
+				80D60AEC1BC4596700C3310E /* KVZModel.xcdatamodeld */,
+				80D60AEF1BC461E000C3310E /* KVZInstaPost+CoreDataProperties.h */,
+				80D60AF01BC461E000C3310E /* KVZInstaPost+CoreDataProperties.m */,
+				80D60AF11BC461E000C3310E /* KVZInstaPost.h */,
+				80D60AF21BC461E000C3310E /* KVZInstaPost.m */,
+				80D60AE71BC4528400C3310E /* KVZCoreDataManager.m */,
+				80D60A901BBC673400C3310E /* KVZPic.h */,
+				80D60A911BBC673400C3310E /* KVZPic.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		80D60A9D1BBE8D6800C3310E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				80D60A961BBE8C1A00C3310E /* KVZLoginViewController.h */,
+				80D60A971BBE8C1A00C3310E /* KVZLoginViewController.m */,
+				80D60A771BBC4DDD00C3310E /* KVZCollectionViewController.h */,
+				80D60A781BBC4DDD00C3310E /* KVZCollectionViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		80D60A9E1BBE8D7500C3310E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				80D60A8D1BBC638E00C3310E /* KVZCollectionViewCell.h */,
+				80D60A8E1BBC638E00C3310E /* KVZCollectionViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		80D60A9F1BBE8D7D00C3310E /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				80D60A931BBC694F00C3310E /* KVZServerManager.h */,
+				80D60A941BBC694F00C3310E /* KVZServerManager.m */,
+			);
+			name = Server;
 			sourceTree = "<group>";
 		};
 		BF8C529ECBD0F7AAB50E7E3D /* Frameworks */ = {
@@ -212,9 +287,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80D60A791BBC4DDD00C3310E /* ViewController.m in Sources */,
+				80D60A8C1BBC633300C3310E /* KVZDataSource.m in Sources */,
+				80D60A791BBC4DDD00C3310E /* KVZCollectionViewController.m in Sources */,
+				80D60A8F1BBC638E00C3310E /* KVZCollectionViewCell.m in Sources */,
+				80D60AEE1BC4596700C3310E /* KVZModel.xcdatamodeld in Sources */,
+				80D60A921BBC673400C3310E /* KVZPic.m in Sources */,
+				80D60AF41BC461E000C3310E /* KVZInstaPost.m in Sources */,
 				80D60A761BBC4DDD00C3310E /* AppDelegate.m in Sources */,
+				80D60A951BBC694F00C3310E /* KVZServerManager.m in Sources */,
+				80D60A981BBE8C1A00C3310E /* KVZLoginViewController.m in Sources */,
 				80D60A731BBC4DDD00C3310E /* main.m in Sources */,
+				80D60AE81BC4528400C3310E /* KVZCoreDataManager.m in Sources */,
+				80D60AF31BC461E000C3310E /* KVZInstaPost+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +452,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		80D60AEC1BC4596700C3310E /* KVZModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				80D60AED1BC4596700C3310E /* KVZModel.xcdatamodel */,
+			);
+			currentVersion = 80D60AED1BC4596700C3310E /* KVZModel.xcdatamodel */;
+			path = KVZModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 80D60A661BBC4DDD00C3310E /* Project object */;
 }

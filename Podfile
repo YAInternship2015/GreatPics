@@ -3,5 +3,6 @@
 
 target 'GreatPics' do
 pod 'AFNetworking', '~> 2.5'
+pod 'FastEasyMapping', '~> 1.0'
 end
 
