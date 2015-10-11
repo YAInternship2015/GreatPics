@@ -7,6 +7,7 @@
 //
 
 #import "KVZCoreDataManager.h"
+#import "FastEasyMapping.h"
 
 
 @implementation KVZCoreDataManager
@@ -80,6 +81,13 @@
         }
     }
 }
+
+
+#pragma mark - Data Mapping
+
+
+
+
 
 
 @end

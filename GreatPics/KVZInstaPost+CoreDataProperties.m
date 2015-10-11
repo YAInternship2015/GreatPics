@@ -14,7 +14,7 @@
 @implementation KVZInstaPost (CoreDataProperties)
 
 @dynamic identifier;
-@dynamic image;
+@dynamic imageURL;
 @dynamic text;
 
 @end

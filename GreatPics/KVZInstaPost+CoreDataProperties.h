@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KVZInstaPost (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *identifier;
-@property (nullable, nonatomic, retain) NSString *image;
+@property (nullable, nonatomic, retain) NSString *imageURL;
 @property (nullable, nonatomic, retain) NSString *text;
 
 @end

@@ -29,25 +29,13 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
 -(void) viewDidLoad {
     [super viewDidLoad];
     
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    KVZCollectionViewController *collectionController = (KVZCollectionViewController *)[sb instantiateViewControllerWithIdentifier:@"collectionViewController"];
-    KVZCollectionViewController *collectionViewController = [[KVZCollectionViewController alloc] init];
-    //self.collectionController = collectionViewController;
-    self.delegate = collectionViewController;
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    KVZCollectionViewController *collectionController = (KVZCollectionViewController *)[sb instantiateViewControllerWithIdentifier:@"collectionViewController"];
+    self.collectionController = collectionController;
+    self.delegate = collectionController;
     self.webView.delegate = self;
     [self login];
     
-}
-
-
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:YES];
-    NSLog(@"%@", self.delegate);
-    
-
-    
-
-
 }
 
 #pragma mark Login / Logout functions
@@ -80,7 +68,6 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
        return YES;
 }
 
-
 #pragma mark - Helper functions
 
 -(void)checkForAccessToken:(NSString *)urlString {
@@ -102,13 +89,30 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
                     self.token = [values lastObject];
                     NSLog(@"checkForAccessToken: %@", self.token);
                     if (self.token) {
+                        
                         [self.delegate accessTokenFound:self.token];
                         NSLog(@"accessTokenFound");
-                    }
-                    
+                        [self showCollectionController];
+                        
+                }
             }
         }
     }
+}
+
+
+-(void)showCollectionController{
+
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+    
+            UIViewController* mainVC = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
+    
+            [mainVC presentViewController:self.collectionController
+                                 animated:YES
+                               completion:nil];
+    
+
 }
 
 @end

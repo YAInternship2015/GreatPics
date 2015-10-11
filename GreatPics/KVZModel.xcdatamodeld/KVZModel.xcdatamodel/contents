@@ -2,10 +2,10 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
     <entity name="KVZInstaPost" representedClassName="KVZInstaPost" syncable="YES">
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="KVZInstaPost" positionX="-54" positionY="-18" width="128" height="88"/>
+        <element name="KVZInstaPost" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

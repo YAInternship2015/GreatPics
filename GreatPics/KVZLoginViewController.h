@@ -16,9 +16,8 @@
 
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
-@property (nonatomic, strong) id <KVZLoginViewControllerDelegate> delegate;
+@property (nonatomic, weak) id <KVZLoginViewControllerDelegate> delegate;
 
-- (IBAction)closeTapped:(id)sender;
 - (void)login;
 - (void)logout;
 

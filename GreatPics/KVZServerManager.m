@@ -9,6 +9,10 @@
 #import "KVZServerManager.h"
 #import "AFNetworking.h"
 #import "KVZLoginViewController.h"
+#import "KVZPostTest.h"
+#import "FastEasyMapping.h"
+#import "KVZCoreDataManager.h"
+#import "KVZInstaPost.h"
 
 @interface KVZServerManager ()
 
@@ -28,23 +32,74 @@
     return manager;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+//        NSURL *url = [[NSURL alloc]initWithString:@"https://api.instagram.com/v1"];
+//        AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+//        self.sessionManager = manager;
+    }
+    return self;
+
+
+}
+
 - (void)getPicsWithToken:(NSString *)token
              onSuccess:(void(^)(NSArray *pics))success
              onFailure:(void(^)(NSError *error, NSInteger statusCode))failure {
     
-    NSString *tagString = [NSString stringWithFormat:@"https://api.instagram.com/v1/tags/nature/media/recent?access_token=%@", token];
+    NSManagedObjectContext *moc = [[KVZCoreDataManager sharedManager] managedObjectContext];
     
-    [[[AFHTTPSessionManager alloc]init] GET:tagString
-                                 parameters:@{@"count" : @"20"}
+    NSString *tagString = [[NSString alloc] initWithFormat:@"https://api.instagram.com/v1/tags/nature/media/recent?access_token=%@",token];
+    
+    
+    
+    [[[AFHTTPSessionManager alloc] init] GET:tagString
+                                 parameters:@{@"count" : @20}
                                     success:^(NSURLSessionDataTask *operation, id responseObject) {
-                                        NSLog(@"JSON: %@", responseObject);
-                                        NSArray *picsArray = [responseObject objectForKey:@"data"];
-                                        NSLog(@"picsArray - %@", picsArray);
+                                       
+                                        NSArray *dictsArray = [responseObject objectForKey:@"data"];
+                                        NSLog(@"picsArray - %@", dictsArray);
+                                        NSMutableArray *objectsArray = [NSMutableArray array];
+                                        for (NSDictionary* dict in dictsArray) {
+                                            
+                                            
+                                            KVZInstaPost *instaPost = [NSEntityDescription insertNewObjectForEntityForName:@"KVZInstaPost" inManagedObjectContext:moc];
+                                            [instaPost setValuesWithServerResponse:dict];
+                                            NSError *error;
+                                             [moc save:&error];
+                                            NSLog(@"post %ld : %@", [dictsArray indexOfObject:dict], instaPost);
+                                          //  [objectsArray addObject:instaPost];
+                                        }
+/*
+                                            FEMMapping *mapping = [KVZPostTest defaultMapping];
+                                            KVZPostTest *post = [FEMDeserializer objectFromRepresentation:responseObject mapping:mapping];
+                                        
+                                        NSArray *dictsArray = [responseObject objectForKey:@"data"];
+                                        NSLog(@"picsArray - %@", dictsArray);
+                                        
+                                        NSMutableArray *objectsArray = [NSMutableArray array];
+                                        for (NSDictionary *dict in dictsArray) {
+                                            FEMMapping *mapping = [KVZPostTest defaultMapping];
+                                            KVZPostTest *post = [FEMDeserializer objectFromRepresentation:dict mapping:mapping];
+                                            [objectsArray addObject:post];
+
+                                        }
+*/
+ 
+                                        if (success) {
+                                            
+                                            success(objectsArray);
+                                           
+                                        }
+
                                     }
                                     failure:^(NSURLSessionDataTask *operation, NSError *error) {
                                         NSLog(@"Error: %@", error);
                                     }];
     
+//    NSArray *array = [NSArray arrayWithArray:objectsArray];
+//    return array;
 }
 
 @end
