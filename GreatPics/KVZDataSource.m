@@ -9,7 +9,6 @@
 #import "KVZDataSource.h"
 #import "KVZCollectionViewCell.h"
 #import "KVZCoreDataManager.h"
-#import "KVZPostTest.h"
 #import "UIKit+AFNetworking.h"
 #import "KVZCollectionViewCell.h"
 #import "KVZInstaPost.h"
@@ -85,95 +84,22 @@
 }
 
 - (void)configureCell:(KVZCollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-   
     KVZInstaPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:post.imageURL]];
     
     __weak KVZCollectionViewCell* weakCell = cell;
-    
     weakCell.imageView.image = nil;
-    NSLog(@"%@", weakCell.imageView);
     
     [weakCell.imageView setImageWithURLRequest:request
                               placeholderImage:nil
                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                  weakCell.imageView.image = image;
-                 NSLog(@"%@", image);
                  [weakCell layoutSubviews];
              }
              failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                  
              }];
-    
-
 }
-
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-//    return [self.picsArray count];
-//
-//}
-//
-//// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    
-//
-//    
-//    static NSString* identifier = @"Cell";
-//    
-//    KVZCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-
-
-//    KVZPostTest* post = [self.picsArray objectAtIndex:indexPath.row];
-//    NSLog(@"post - %@", post.idCode);
-//    
-//    
-//    NSLog(@"post.id - %@ post.text - %@ post URL - %@", post.idCode, post.text, post.imageURL);
-//        
-//        NSURLRequest* request = [NSURLRequest requestWithURL:post.imageURL];
-//        
-//        __weak KVZCollectionViewCell* weakCell = cell;
-//        
-//        weakCell.imageView.image = nil;
-//        NSLog(@"%@", weakCell.imageView);
-//        
-//        [weakCell.imageView
-//         setImageWithURLRequest:request
-//         placeholderImage:nil
-//         success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-//             weakCell.imageView.image = image;
-//             NSLog(@"%@", image);
-//             [weakCell layoutSubviews];
-//         }
-//         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-//             
-//         }];
-
-       
-
-  //  }
-    
-//    return cell;
-//
-//}
-
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-
-            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) {
-                               {
-                    NSLog(@"Подгружаю !");
-                    
-                   // [];
-                }
-            }
-    
-}
-
-
 
 @end
 

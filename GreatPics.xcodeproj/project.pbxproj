@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F8EA4D6F3394249AF7563D0 /* libPods-GreatPics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB8205A5D80569858B236E8 /* libPods-GreatPics.a */; };
+		80BBC3F01BCD8E1A004E4363 /* KVZInstaPostManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 80BBC3EF1BCD8E1A004E4363 /* KVZInstaPostManager.m */; settings = {ASSET_TAGS = (); }; };
 		80D60A731BBC4DDD00C3310E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A721BBC4DDD00C3310E /* main.m */; };
 		80D60A761BBC4DDD00C3310E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A751BBC4DDD00C3310E /* AppDelegate.m */; };
 		80D60A791BBC4DDD00C3310E /* KVZCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60A781BBC4DDD00C3310E /* KVZCollectionViewController.m */; };
@@ -23,12 +24,13 @@
 		80D60AEE1BC4596700C3310E /* KVZModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80D60AEC1BC4596700C3310E /* KVZModel.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		80D60AF31BC461E000C3310E /* KVZInstaPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60AF01BC461E000C3310E /* KVZInstaPost+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		80D60AF41BC461E000C3310E /* KVZInstaPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60AF21BC461E000C3310E /* KVZInstaPost.m */; settings = {ASSET_TAGS = (); }; };
-		80D60AF71BC6A87000C3310E /* KVZPostTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D60AF61BC6A87000C3310E /* KVZPostTest.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1AB8205A5D80569858B236E8 /* libPods-GreatPics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GreatPics.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CB8296918332F8EF5EFE0F8 /* Pods-GreatPics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatPics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GreatPics/Pods-GreatPics.debug.xcconfig"; sourceTree = "<group>"; };
+		80BBC3EE1BCD8E1A004E4363 /* KVZInstaPostManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVZInstaPostManager.h; sourceTree = "<group>"; };
+		80BBC3EF1BCD8E1A004E4363 /* KVZInstaPostManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVZInstaPostManager.m; sourceTree = "<group>"; };
 		80D60A6E1BBC4DDD00C3310E /* GreatPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreatPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80D60A721BBC4DDD00C3310E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		80D60A741BBC4DDD00C3310E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -55,8 +57,6 @@
 		80D60AF01BC461E000C3310E /* KVZInstaPost+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KVZInstaPost+CoreDataProperties.m"; sourceTree = "<group>"; };
 		80D60AF11BC461E000C3310E /* KVZInstaPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVZInstaPost.h; sourceTree = "<group>"; };
 		80D60AF21BC461E000C3310E /* KVZInstaPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVZInstaPost.m; sourceTree = "<group>"; };
-		80D60AF51BC6A87000C3310E /* KVZPostTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVZPostTest.h; sourceTree = "<group>"; };
-		80D60AF61BC6A87000C3310E /* KVZPostTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVZPostTest.m; sourceTree = "<group>"; };
 		EB7B32DF2FE679F0E55E0AD5 /* Pods-GreatPics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatPics.release.xcconfig"; path = "Pods/Target Support Files/Pods-GreatPics/Pods-GreatPics.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,8 +127,8 @@
 				80D60AF01BC461E000C3310E /* KVZInstaPost+CoreDataProperties.m */,
 				80D60AF11BC461E000C3310E /* KVZInstaPost.h */,
 				80D60AF21BC461E000C3310E /* KVZInstaPost.m */,
-				80D60AF51BC6A87000C3310E /* KVZPostTest.h */,
-				80D60AF61BC6A87000C3310E /* KVZPostTest.m */,
+				80BBC3EE1BCD8E1A004E4363 /* KVZInstaPostManager.h */,
+				80BBC3EF1BCD8E1A004E4363 /* KVZInstaPostManager.m */,
 				80D60AE61BC4528400C3310E /* KVZCoreDataManager.h */,
 				80D60AE71BC4528400C3310E /* KVZCoreDataManager.m */,
 			);
@@ -290,13 +290,13 @@
 				80D60A8C1BBC633300C3310E /* KVZDataSource.m in Sources */,
 				80D60A791BBC4DDD00C3310E /* KVZCollectionViewController.m in Sources */,
 				80D60A8F1BBC638E00C3310E /* KVZCollectionViewCell.m in Sources */,
+				80BBC3F01BCD8E1A004E4363 /* KVZInstaPostManager.m in Sources */,
 				80D60AEE1BC4596700C3310E /* KVZModel.xcdatamodeld in Sources */,
 				80D60AF41BC461E000C3310E /* KVZInstaPost.m in Sources */,
 				80D60A761BBC4DDD00C3310E /* AppDelegate.m in Sources */,
 				80D60A951BBC694F00C3310E /* KVZServerManager.m in Sources */,
 				80D60A981BBE8C1A00C3310E /* KVZLoginViewController.m in Sources */,
 				80D60A731BBC4DDD00C3310E /* main.m in Sources */,
-				80D60AF71BC6A87000C3310E /* KVZPostTest.m in Sources */,
 				80D60AE81BC4528400C3310E /* KVZCoreDataManager.m in Sources */,
 				80D60AF31BC461E000C3310E /* KVZInstaPost+CoreDataProperties.m in Sources */,
 			);

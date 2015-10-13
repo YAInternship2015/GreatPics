@@ -13,8 +13,6 @@
 
 @interface KVZDataSource : NSObject <UICollectionViewDataSource, NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray *picsArray;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-
 
 @end

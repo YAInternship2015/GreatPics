@@ -9,8 +9,6 @@
 #import "KVZServerManager.h"
 #import "AFNetworking.h"
 #import "KVZLoginViewController.h"
-#import "KVZPostTest.h"
-#import "FastEasyMapping.h"
 #import "KVZCoreDataManager.h"
 #import "KVZInstaPost.h"
 
@@ -48,8 +46,7 @@
              onSuccess:(void(^)(NSArray *pics))success
              onFailure:(void(^)(NSError *error, NSInteger statusCode))failure {
     
-    NSManagedObjectContext *moc = [[KVZCoreDataManager sharedManager] managedObjectContext];
-    
+       
     NSString *tagString = [[NSString alloc] initWithFormat:@"https://api.instagram.com/v1/tags/nature/media/recent?access_token=%@",token];
     
     
@@ -61,35 +58,20 @@
                                         NSArray *dictsArray = [responseObject objectForKey:@"data"];
                                         NSLog(@"picsArray - %@", dictsArray);
                                         NSMutableArray *objectsArray = [NSMutableArray array];
-                                        for (NSDictionary* dict in dictsArray) {
-                                            
-                                            
-                                            KVZInstaPost *instaPost = [NSEntityDescription insertNewObjectForEntityForName:@"KVZInstaPost" inManagedObjectContext:moc];
-                                            [instaPost setValuesWithServerResponse:dict];
-                                            NSError *error;
-                                             [moc save:&error];
-                                            NSLog(@"post %ld : %@", [dictsArray indexOfObject:dict], instaPost);
-                                          //  [objectsArray addObject:instaPost];
-                                        }
-/*
-                                            FEMMapping *mapping = [KVZPostTest defaultMapping];
-                                            KVZPostTest *post = [FEMDeserializer objectFromRepresentation:responseObject mapping:mapping];
-                                        
-                                        NSArray *dictsArray = [responseObject objectForKey:@"data"];
-                                        NSLog(@"picsArray - %@", dictsArray);
-                                        
-                                        NSMutableArray *objectsArray = [NSMutableArray array];
-                                        for (NSDictionary *dict in dictsArray) {
-                                            FEMMapping *mapping = [KVZPostTest defaultMapping];
-                                            KVZPostTest *post = [FEMDeserializer objectFromRepresentation:dict mapping:mapping];
-                                            [objectsArray addObject:post];
-
-                                        }
-*/
+//                                        for (NSDictionary* dict in dictsArray) {
+//                                            
+//                                            
+//                                            KVZInstaPost *instaPost = [NSEntityDescription insertNewObjectForEntityForName:@"KVZInstaPost" inManagedObjectContext:moc];
+//                                            [instaPost setValuesWithServerResponse:dict];
+//                                            NSError *error;
+//                                             [moc save:&error];
+//                                            NSLog(@"post %ld : %@", [dictsArray indexOfObject:dict], instaPost);
+//                                            [objectsArray addObject:instaPost];
+ //                                       }
  
                                         if (success) {
                                             
-                                            success(objectsArray);
+                                            success(dictsArray);
                                            
                                         }
 

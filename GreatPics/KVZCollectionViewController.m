@@ -9,15 +9,19 @@
 #import "KVZCollectionViewController.h"
 #import "KVZDataSource.h"
 #import "KVZServerManager.h"
+#import "KVZInstaPost.h"
+#import "KVZCoreDataManager.h"
+#import "KVZInstaPostManager.h"
+#import <CoreData/CoreData.h>
 
 
 
 @interface KVZCollectionViewController () <KVZLoginViewControllerDelegate, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray *picsArray;
 @property (strong, nonatomic) KVZDataSource *dataSource;
 @property (nonatomic, strong) KVZServerManager *serverManager;
 @property (nonatomic, strong) NSString *token;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end
 
@@ -25,82 +29,47 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-   // [self authorizeUser];
-    
-
-    
 }
 
--(void)dealloc {
-    NSLog(@"dealoc CC");
-}
-
-#pragma mark - API
+#pragma mark - Instagram API
 
 - (void)getPicsFromServerWithToken:token {
     [self.serverManager getPicsWithToken:token
                                            onSuccess:^(NSArray *pics) {
-//                                               [self.picsArray addObjectsFromArray:pics];
-//                                               NSLog(@"collection PICS ARRAY - %@", self.picsArray);
-//                                               
-//                                              self.dataSource.picsArray = self.picsArray;
-//                                               
-//                                             [self.collectionView reloadData];
+                                                    for (NSDictionary* dict in pics) {
+                                                        KVZInstaPostManager *manager = [[KVZInstaPostManager alloc]init];
+                                                        [manager checkForEqualPosts:dict];
+                                              }
                                            }
                                            onFailure:^(NSError *error, NSInteger statusCode) {
                                                NSLog(@"error - %@, status code - %lu", [error localizedDescription], statusCode);
                                            }];
-    
 }
 
 #pragma mark - KVZLoginViewControllerDelegate
 
 - (void)accessTokenFound:(NSString *)token {
-    
     KVZDataSource *dataSource = [[KVZDataSource alloc]init];
     self.dataSource = dataSource;
     self.collectionView.dataSource = dataSource;
-   // KVZDataSource *collectionDataSource = (KVZDataSource *)self.collectionView.dataSource;
     dataSource.fetchedResultsController.delegate = self;
-
     
-    self.picsArray =[NSMutableArray array];
-    self.serverManager = [KVZServerManager sharedManager];
+    NSManagedObjectContext *moc = [[KVZCoreDataManager sharedManager] managedObjectContext];
+    self.managedObjectContext = moc;
 
+    self.serverManager = [KVZServerManager sharedManager];
    
     self.token = token;
-    
-        [self getPicsFromServerWithToken:self.token];
-
+    [self getPicsFromServerWithToken:self.token];
 }
-
-//- (void)authorizeUser{
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    KVZLoginViewController *loginController = [sb instantiateViewControllerWithIdentifier:@"loginViewController"];
-//    
-//    [self dismissViewControllerAnimated:YES
-//                             completion:nil];
-//    
-//    UIViewController* mainVC = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
-//    
-//    [mainVC presentViewController:loginController
-//                         animated:YES
-//                       completion:nil];
-//
-//}
 
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.row == ([self.picsArray count] - 1)) {
-        NSLog(@"willDisplayCell %ld", indexPath.row);
-      //  [self getPicsFromServerWithToken:self.token];
-                
+    KVZCoreDataManager *dataManager = [KVZCoreDataManager sharedManager];
+    if (indexPath.row == ([dataManager allObjects].count - 1)) {
+        [self getPicsFromServerWithToken:self.token];
     }
-    
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
@@ -122,6 +91,7 @@
         }
     }
 }
+
 
 
 @end

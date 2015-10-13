@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @protocol KVZLoginViewControllerDelegate
+
 - (void)accessTokenFound:(NSString *)token;
+
 @end
 
 @interface KVZLoginViewController : UIViewController <UIWebViewDelegate>
@@ -19,8 +21,6 @@
 @property (nonatomic, weak) id <KVZLoginViewControllerDelegate> delegate;
 
 - (void)login;
-- (void)logout;
-
--(void)checkForAccessToken:(NSString *)urlString;
+- (void)checkForAccessToken:(NSString *)urlString;
 
 @end

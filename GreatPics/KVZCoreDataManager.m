@@ -7,8 +7,6 @@
 //
 
 #import "KVZCoreDataManager.h"
-#import "FastEasyMapping.h"
-
 
 @implementation KVZCoreDataManager
 
@@ -82,12 +80,17 @@
     }
 }
 
-
-#pragma mark - Data Mapping
-
-
-
-
-
+- (NSArray *)allObjects {
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"KVZInstaPost" inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:description];
+    
+    NSError *requestError = nil;
+    NSArray *requestArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+    if (requestError) {
+        NSLog(@"%@", [requestError localizedDescription]);
+    }
+    return requestArray;
+}
 
 @end

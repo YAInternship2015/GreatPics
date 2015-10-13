@@ -19,6 +19,6 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-
+- (NSArray *)allObjects;
 
 @end

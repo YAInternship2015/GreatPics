@@ -35,63 +35,45 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
     self.delegate = collectionController;
     self.webView.delegate = self;
     [self login];
-    
 }
 
-#pragma mark Login / Logout functions
+#pragma mark Login
 
 - (void)login {
-    
    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
     
     NSString *urlString = [NSString stringWithFormat:@"%@client_id=%@&redirect_uri=%@&response_type=token", INSTAGRAM_AUTH_URL, INSTAGRAM_CLIENT_ID, INSTAGRAM_REDIRECT_URI];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    NSLog(@"REDIRECT URL - %@", url.absoluteString);
     [self.webView loadRequest:request];
-
-}
-
--(void)logout {
-    NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (NSHTTPCookie* cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
-        [cookies deleteCookie:cookie];
-    }
 }
 
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
     NSString *urlString = request.URL.absoluteString;
     [self checkForAccessToken:urlString];
-       return YES;
+    return YES;
 }
 
 #pragma mark - Helper functions
 
--(void)checkForAccessToken:(NSString *)urlString {
-
+- (void)checkForAccessToken:(NSString *)urlString {
     if ([urlString rangeOfString:@"#access_token="].location != NSNotFound) {
-        
         NSArray* array = [urlString componentsSeparatedByString:@"#"];
         
         if ([array count] > 1) {
             urlString = [array lastObject];
         }
             NSArray* values = [urlString componentsSeparatedByString:@"="];
-            
             if ([values count] == 2) {
-                
                 NSString* key = [values firstObject];
                 
                 if ([key isEqualToString:@"access_token"]) {
                     self.token = [values lastObject];
-                    NSLog(@"checkForAccessToken: %@", self.token);
+                    
                     if (self.token) {
-                        
                         [self.delegate accessTokenFound:self.token];
-                        NSLog(@"accessTokenFound");
                         [self showCollectionController];
                         
                 }
@@ -100,19 +82,14 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
     }
 }
 
-
--(void)showCollectionController{
-
+- (void)showCollectionController {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
     
-            UIViewController* mainVC = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
-    
-            [mainVC presentViewController:self.collectionController
-                                 animated:YES
-                               completion:nil];
-    
-
+    UIViewController* mainVC = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
+    [mainVC presentViewController:self.collectionController
+                         animated:YES
+                       completion:nil];
 }
 
 @end
