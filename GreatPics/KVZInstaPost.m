@@ -10,16 +10,11 @@
 
 @implementation KVZInstaPost
 
-- (void)setValuesWithServerResponse:(NSDictionary *)responseObject{
+- (void)updateWithDictionary:(NSDictionary *)responseObject {
     self.identifier = [responseObject objectForKey:@"id"];
-    
-    NSDictionary *captionDict = [responseObject objectForKey:@"caption"];
-    self.text = [captionDict objectForKey:@"text"];
-    
-    NSDictionary *imagesDict = [responseObject objectForKey:@"images"];
-    NSDictionary *imageDict = [imagesDict objectForKey:@"standard_resolution"];
-    NSString* urlString = [imageDict objectForKey:@"url"];
-    self.imageURL = urlString;
+    self.createdAtDate = [NSDate date];
+    self.text = [responseObject valueForKeyPath:@"caption.text"];
+    self.imageURL = [responseObject valueForKeyPath:@"images.standard_resolution.url"];
 }
 
 @end

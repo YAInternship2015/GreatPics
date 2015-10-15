@@ -8,20 +8,29 @@
 
 #import "KVZDataSource.h"
 #import "KVZCollectionViewCell.h"
+#import "KVZCollectionViewController.h"
 #import "KVZCoreDataManager.h"
 #import "UIKit+AFNetworking.h"
 #import "KVZCollectionViewCell.h"
 #import "KVZInstaPost.h"
 
 
-@interface KVZDataSource ()
+@interface KVZDataSource () <NSFetchedResultsControllerDelegate, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, readwrite) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
-@implementation KVZDataSource 
+@implementation KVZDataSource
 
+-(instancetype)init {
+    self = [super init];
+    if (self) {
+        self.fetchedResultsController.delegate = self;
+    }
+    return self;
+}
 
 - (NSManagedObjectContext *)managedObjectContext {
     if (!_managedObjectContext) {
@@ -44,7 +53,7 @@
     static const NSInteger kFetchBatchSize = 20;
     [fetchRequest setFetchBatchSize:kFetchBatchSize];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"identifier" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAtDate" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -66,7 +75,7 @@
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -85,20 +94,27 @@
 
 - (void)configureCell:(KVZCollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     KVZInstaPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:post.imageURL]];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:post.imageURL]];
+}
+
+
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][indexPath.section];
+    NSInteger numberOfItems = [sectionInfo numberOfObjects];
     
-    __weak KVZCollectionViewCell* weakCell = cell;
-    weakCell.imageView.image = nil;
-    
-    [weakCell.imageView setImageWithURLRequest:request
-                              placeholderImage:nil
-                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                 weakCell.imageView.image = image;
-                 [weakCell layoutSubviews];
-             }
-             failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                 
-             }];
+    if (indexPath.item == numberOfItems - 3) {
+        if ([self.delegate respondsToSelector:@selector(dataSourceWillDisplayLastCell:)]) {
+            [self.delegate dataSourceWillDisplayLastCell:self];
+        }
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+    if ([self.delegate respondsToSelector:@selector(dataSourceDidChangeContent:)]) {
+        [self.delegate dataSourceDidChangeContent:self];
+    }
 }
 
 @end

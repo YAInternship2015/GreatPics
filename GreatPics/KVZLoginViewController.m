@@ -15,29 +15,36 @@ static NSString *const INSTAGRAM_REDIRECT_URI = @"https://yalantis.com";
 static NSString *const INSTAGRAM_CLIENT_SECRET = @"5d245e1de66a4f75a4779468c03a8f8d";
 static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f";
 
-@interface KVZLoginViewController ()
+@interface KVZLoginViewController () <UIWebViewDelegate>
 
 @property (nonatomic, strong) KVZCollectionViewController *collectionController;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
 
 @end
 
 
 @implementation KVZLoginViewController
 
-#pragma mark Main
+#pragma mark - Main
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        KVZCollectionViewController *collectionController = (KVZCollectionViewController *)[sb instantiateViewControllerWithIdentifier:@"collectionViewController"];
+        self.collectionController = collectionController;
+        self.delegate = collectionController;
+    }
+    return self;
+}
 
 -(void) viewDidLoad {
     [super viewDidLoad];
-    
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    KVZCollectionViewController *collectionController = (KVZCollectionViewController *)[sb instantiateViewControllerWithIdentifier:@"collectionViewController"];
-    self.collectionController = collectionController;
-    self.delegate = collectionController;
     self.webView.delegate = self;
     [self login];
 }
 
-#pragma mark Login
+#pragma mark - Login
 
 - (void)login {
    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
@@ -70,12 +77,13 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
                 NSString* key = [values firstObject];
                 
                 if ([key isEqualToString:@"access_token"]) {
-                    self.token = [values lastObject];
+                    NSString *accessToken = [values lastObject];
                     
-                    if (self.token) {
-                        [self.delegate accessTokenFound:self.token];
-                        [self showCollectionController];
-                        
+                    if (accessToken) {
+                        if ([self.delegate respondsToSelector:@selector(loginViewController:didAccessWithToken:)]) {
+                            [self.delegate loginViewController:self didAccessWithToken:accessToken];
+                            [self showCollectionController];
+                    }
                 }
             }
         }

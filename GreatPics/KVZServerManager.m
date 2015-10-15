@@ -7,10 +7,7 @@
 //
 
 #import "KVZServerManager.h"
-#import "AFNetworking.h"
-#import "KVZLoginViewController.h"
-#import "KVZCoreDataManager.h"
-#import "KVZInstaPost.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface KVZServerManager ()
 
@@ -20,8 +17,9 @@
 
 @implementation KVZServerManager
 
+#pragma mark - Class
+
 + (KVZServerManager *)sharedManager {
-    
     static KVZServerManager *manager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -30,67 +28,48 @@
     return manager;
 }
 
+#pragma mark - Initialization
+
 - (instancetype)init {
     self = [super init];
     if (self) {
-//        NSURL *url = [[NSURL alloc]initWithString:@"https://api.instagram.com/v1"];
-//        AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
-//        self.sessionManager = manager;
+        NSURL *URL = [NSURL URLWithString:@"https://api.instagram.com/v1/"];
+        self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:URL];
     }
     return self;
-
-
 }
 
-- (void)getPicsWithToken:(NSString *)token
-             onSuccess:(void(^)(NSArray *pics))success
-             onFailure:(void(^)(NSError *error, NSInteger statusCode))failure {
+- (void)recentPostsForTagName:(NSString *)tagName
+                        count:(NSUInteger)count
+                     maxTagID:(NSString *)maxTagID
+                  accessToken:(NSString *)accessToken
+                    onSuccess:(void(^)(id responseObject))success
+                    onFailure:(void(^)(NSError *error))failure {
     
-       
-    NSString *tagString = [[NSString alloc] initWithFormat:@"https://api.instagram.com/v1/tags/nature/media/recent?access_token=%@",token];
+    NSString *URLString = [NSString stringWithFormat:@"tags/%@/media/recent", tagName];
     
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     
+       if (accessToken) {
+        parameters[@"access_token"] = accessToken;
+    }
+    parameters[@"count"] = @(count);
+    if (maxTagID) {
+        parameters[@"max_tag_id"] = maxTagID;
+    }
     
-    [[[AFHTTPSessionManager alloc] init] GET:tagString
-                                 parameters:@{@"count" : @20}
-                                    success:^(NSURLSessionDataTask *operation, id responseObject) {
-                                       
-                                        NSArray *dictsArray = [responseObject objectForKey:@"data"];
-                                        NSLog(@"picsArray - %@", dictsArray);
-                                        NSMutableArray *objectsArray = [NSMutableArray array];
-//                                        for (NSDictionary* dict in dictsArray) {
-//                                            
-//                                            
-//                                            KVZInstaPost *instaPost = [NSEntityDescription insertNewObjectForEntityForName:@"KVZInstaPost" inManagedObjectContext:moc];
-//                                            [instaPost setValuesWithServerResponse:dict];
-//                                            NSError *error;
-//                                             [moc save:&error];
-//                                            NSLog(@"post %ld : %@", [dictsArray indexOfObject:dict], instaPost);
-//                                            [objectsArray addObject:instaPost];
- //                                       }
- 
-                                        if (success) {
-                                            
-                                            success(dictsArray);
-                                           
-                                        }
-
-                                    }
-                                    failure:^(NSURLSessionDataTask *operation, NSError *error) {
-                                        NSLog(@"Error: %@", error);
-                                    }];
-    
-//    NSArray *array = [NSArray arrayWithArray:objectsArray];
-//    return array;
+    [self.sessionManager GET:URLString
+                  parameters:[parameters copy]
+                     success:^(NSURLSessionDataTask *operation, id responseObject) {
+                         if (success) {
+                             success(responseObject);
+                         }
+                     }
+                     failure:^(NSURLSessionDataTask *operation, NSError *error) {
+                         if (failure) {
+                             failure(error);
+                         }
+                     }];
 }
 
 @end
-
-/*
-https://api.instagram.com/v1/tags/{tag-name}/media/recent?access_token=ACCESS-TOKEN
-/tags/tag-name/media/recent
-PARAMETERS
-COUNT	Count of tagged media to return.
-MIN_TAG_ID	Return media before this min_tag_id.
-MAX_TAG_ID	Return media after this max_tag_id.
-*/

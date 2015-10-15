@@ -8,19 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol KVZLoginViewControllerDelegate
+@class KVZLoginViewController;
 
-- (void)accessTokenFound:(NSString *)token;
+@protocol KVZLoginViewControllerDelegate <NSObject>
+
+- (void)loginViewController:(KVZLoginViewController *)controller didAccessWithToken:(NSString *)token;
 
 @end
 
-@interface KVZLoginViewController : UIViewController <UIWebViewDelegate>
+@interface KVZLoginViewController : UIViewController 
 
-@property (nonatomic, strong) NSString *token;
-@property (nonatomic, weak) IBOutlet UIWebView *webView;
 @property (nonatomic, weak) id <KVZLoginViewControllerDelegate> delegate;
-
-- (void)login;
-- (void)checkForAccessToken:(NSString *)urlString;
 
 @end

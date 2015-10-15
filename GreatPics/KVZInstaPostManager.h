@@ -10,6 +10,6 @@
 
 @interface KVZInstaPostManager : NSObject
 
-- (void)checkForEqualPosts:(NSDictionary *)serverResponse;
+- (void)importPosts:(NSArray *)posts;
 
 @end

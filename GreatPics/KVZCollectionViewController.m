@@ -9,89 +9,80 @@
 #import "KVZCollectionViewController.h"
 #import "KVZDataSource.h"
 #import "KVZServerManager.h"
-#import "KVZInstaPost.h"
 #import "KVZCoreDataManager.h"
 #import "KVZInstaPostManager.h"
 #import <CoreData/CoreData.h>
+#import "KVZLoginViewController.h"
 
 
-
-@interface KVZCollectionViewController () <KVZLoginViewControllerDelegate, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
+@interface KVZCollectionViewController () <KVZLoginViewControllerDelegate, KVZDataSourceDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) KVZDataSource *dataSource;
-@property (nonatomic, strong) KVZServerManager *serverManager;
 @property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSDictionary *pagination;
 
 @end
 
 @implementation KVZCollectionViewController
 
+#pragma mark - Main
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.dataSource = [[KVZDataSource alloc] init];
+        self.dataSource.delegate  = self;
+    }
+    return self;
+}
+
+- (NSManagedObjectContext *)managedObjectContext {
+    return [[KVZCoreDataManager sharedManager] managedObjectContext];
+}
+
+- (KVZServerManager *)serverManager {
+    return [KVZServerManager sharedManager];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.collectionView.dataSource = self.dataSource;
+    self.collectionView.delegate = self.dataSource;
 }
 
 #pragma mark - Instagram API
 
-- (void)getPicsFromServerWithToken:token {
-    [self.serverManager getPicsWithToken:token
-                                           onSuccess:^(NSArray *pics) {
-                                                    for (NSDictionary* dict in pics) {
-                                                        KVZInstaPostManager *manager = [[KVZInstaPostManager alloc]init];
-                                                        [manager checkForEqualPosts:dict];
-                                              }
-                                           }
-                                           onFailure:^(NSError *error, NSInteger statusCode) {
-                                               NSLog(@"error - %@, status code - %lu", [error localizedDescription], statusCode);
-                                           }];
+- (void)getPicsFromServerWithToken:(NSString *)token maxTagID:(NSString *)maxTagID {
+    __weak KVZCollectionViewController *weakSelf = self;
+    [self.serverManager recentPostsForTagName:@"workhardanywhere"
+                                        count:20
+                                     maxTagID:maxTagID
+                                  accessToken:token
+                                    onSuccess:^(id responseObject) {
+                                        KVZInstaPostManager *manager = [[KVZInstaPostManager alloc] init];
+                                        weakSelf.pagination = [responseObject valueForKey:@"pagination"];
+                                        [manager importPosts:[responseObject valueForKey:@"data"]];
+                                        
+                                    } onFailure:^(NSError *error) {
+                                        NSLog(@"error - %@, status code - %lu", [error localizedDescription], [error code]);
+                                    }];
 }
 
 #pragma mark - KVZLoginViewControllerDelegate
 
-- (void)accessTokenFound:(NSString *)token {
-    KVZDataSource *dataSource = [[KVZDataSource alloc]init];
-    self.dataSource = dataSource;
-    self.collectionView.dataSource = dataSource;
-    dataSource.fetchedResultsController.delegate = self;
-    
-    NSManagedObjectContext *moc = [[KVZCoreDataManager sharedManager] managedObjectContext];
-    self.managedObjectContext = moc;
-
-    self.serverManager = [KVZServerManager sharedManager];
-   
+- (void)loginViewController:(KVZLoginViewController *)controller didAccessWithToken:(NSString *)token {
     self.token = token;
-    [self getPicsFromServerWithToken:self.token];
+    [self getPicsFromServerWithToken:token maxTagID:nil];
 }
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - KVZDataSourceDelegate
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    KVZCoreDataManager *dataManager = [KVZCoreDataManager sharedManager];
-    if (indexPath.row == ([dataManager allObjects].count - 1)) {
-        [self getPicsFromServerWithToken:self.token];
-    }
+- (void)dataSourceWillDisplayLastCell:(KVZDataSource *)dataSource {
+    [self getPicsFromServerWithToken:self.token maxTagID:self.pagination[@"next_max_tag_id"]];
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    UICollectionView *collectionView = self.collectionView;
-    switch(type) {
-        case NSFetchedResultsChangeInsert: {
-            [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
-        }
-            break;
-        case NSFetchedResultsChangeDelete: {
-            [collectionView deleteItemsAtIndexPaths:@[indexPath]];
-        }
-            break;
-        case NSFetchedResultsChangeUpdate: {
-            [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-        }
-            break;
-        default: {
-        }
-    }
+- (void)dataSourceDidChangeContent:(KVZDataSource *)dataSource{
+    [self.collectionView reloadData];
 }
-
-
 
 @end

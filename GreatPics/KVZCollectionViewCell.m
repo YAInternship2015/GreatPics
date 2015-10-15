@@ -10,5 +10,9 @@
 
 @implementation KVZCollectionViewCell
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    self.imageView.image = nil;
+}
 
 @end

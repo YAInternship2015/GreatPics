@@ -7,14 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
 @interface KVZServerManager : NSObject
 
-+(KVZServerManager *)sharedManager;
++ (KVZServerManager *)sharedManager;
 
-- (void)getPicsWithToken:(NSString *)token
-             onSuccess:(void(^)(NSArray *pics))success
-             onFailure:(void(^)(NSError *error, NSInteger statusCode))failure;
+- (void)recentPostsForTagName:(NSString *)tagName
+                        count:(NSUInteger)count
+                     maxTagID:(NSString *)maxTagID
+                  accessToken:(NSString *)accessToken
+                    onSuccess:(void(^)(id responseObject))success
+                    onFailure:(void(^)(NSError *error))failure;
 
 @end

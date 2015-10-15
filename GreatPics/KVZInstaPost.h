@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KVZInstaPost : NSManagedObject
 
-- (void)setValuesWithServerResponse:(NSDictionary *)responseObject;
+- (void)updateWithDictionary:(NSDictionary *)responseObject;
 
 @end
 
