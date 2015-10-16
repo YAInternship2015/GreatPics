@@ -18,6 +18,7 @@
 @interface KVZDataSource () <NSFetchedResultsControllerDelegate, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+#warning readwrite можно не писать
 @property (nonatomic, strong, readwrite) NSFetchedResultsController *fetchedResultsController;
 
 @end
@@ -104,6 +105,7 @@
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][indexPath.section];
     NSInteger numberOfItems = [sectionInfo numberOfObjects];
     
+#warning цифру 3 надо вынести в константы
     if (indexPath.item == numberOfItems - 3) {
         if ([self.delegate respondsToSelector:@selector(dataSourceWillDisplayLastCell:)]) {
             [self.delegate dataSourceWillDisplayLastCell:self];

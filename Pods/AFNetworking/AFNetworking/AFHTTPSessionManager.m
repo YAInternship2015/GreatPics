@@ -114,6 +114,7 @@
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"GET" URLString:URLString parameters:parameters success:success failure:failure];
 
     [dataTask resume];
+
     return dataTask;
 }
 
@@ -252,6 +253,7 @@
             }
         }
     }];
+
     return dataTask;
 }
 

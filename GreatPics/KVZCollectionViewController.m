@@ -18,6 +18,7 @@
 @interface KVZCollectionViewController () <KVZLoginViewControllerDelegate, KVZDataSourceDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) KVZDataSource *dataSource;
+#warning токет и информация о пейджинге не нужна вью контроллеру. Она должна быть в том объекте, который инициирует обращение к апи слою, в вашем случае это serverManager
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) NSDictionary *pagination;
 
@@ -36,6 +37,7 @@
     return self;
 }
 
+#warning этот метод никем не используется
 - (NSManagedObjectContext *)managedObjectContext {
     return [[KVZCoreDataManager sharedManager] managedObjectContext];
 }
@@ -52,6 +54,7 @@
 
 #pragma mark - Instagram API
 
+#warning этот метод не нужен во вью контроллере
 - (void)getPicsFromServerWithToken:(NSString *)token maxTagID:(NSString *)maxTagID {
     __weak KVZCollectionViewController *weakSelf = self;
     [self.serverManager recentPostsForTagName:@"workhardanywhere"
@@ -78,6 +81,7 @@
 #pragma mark - KVZDataSourceDelegate
 
 - (void)dataSourceWillDisplayLastCell:(KVZDataSource *)dataSource {
+#warning в этом мете контроллер должен сказать serverManager'у "загрузи следующую пачку постов", то есть вызвать метод вроде "loadNextPageOfPosts", без параметров. Все необходимые параметры будут внутри serverManager
     [self getPicsFromServerWithToken:self.token maxTagID:self.pagination[@"next_max_tag_id"]];
 }
 

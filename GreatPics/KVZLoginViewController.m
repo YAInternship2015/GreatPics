@@ -30,6 +30,7 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if (self) {
+#warning логин контроллер ничего не должен знать о collectionController'е
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         KVZCollectionViewController *collectionController = (KVZCollectionViewController *)[sb instantiateViewControllerWithIdentifier:@"collectionViewController"];
         self.collectionController = collectionController;
@@ -47,6 +48,7 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
 #pragma mark - Login
 
 - (void)login {
+#warning зачем это?
    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
     
     NSString *urlString = [NSString stringWithFormat:@"%@client_id=%@&redirect_uri=%@&response_type=token", INSTAGRAM_AUTH_URL, INSTAGRAM_CLIENT_ID, INSTAGRAM_REDIRECT_URI];
@@ -65,6 +67,7 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
 
 #pragma mark - Helper functions
 
+#warning этот метод надо вынести в отдельный класс-хелпер
 - (void)checkForAccessToken:(NSString *)urlString {
     if ([urlString rangeOfString:@"#access_token="].location != NSNotFound) {
         NSArray* array = [urlString componentsSeparatedByString:@"#"];
@@ -90,6 +93,7 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
     }
 }
 
+#warning эта логика перехода не должны быть в логин контроллере
 - (void)showCollectionController {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
