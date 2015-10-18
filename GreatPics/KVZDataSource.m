@@ -7,8 +7,6 @@
 //
 
 #import "KVZDataSource.h"
-#import "KVZCollectionViewCell.h"
-#import "KVZCollectionViewController.h"
 #import "KVZCoreDataManager.h"
 #import "UIKit+AFNetworking.h"
 #import "KVZCollectionViewCell.h"
@@ -18,12 +16,13 @@
 @interface KVZDataSource () <NSFetchedResultsControllerDelegate, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-#warning readwrite можно не писать
-@property (nonatomic, strong, readwrite) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
 @implementation KVZDataSource
+
+#pragma mark - Main
 
 -(instancetype)init {
     self = [super init];
@@ -89,7 +88,6 @@
     KVZCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
     [self configureCell:cell atIndexPath:indexPath];
-    
     return cell;
 }
 
@@ -104,9 +102,8 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][indexPath.section];
     NSInteger numberOfItems = [sectionInfo numberOfObjects];
-    
-#warning цифру 3 надо вынести в константы
-    if (indexPath.item == numberOfItems - 3) {
+    static const NSInteger numberOfPosts = 3;
+    if (indexPath.item == numberOfItems - numberOfPosts) {
         if ([self.delegate respondsToSelector:@selector(dataSourceWillDisplayLastCell:)]) {
             [self.delegate dataSourceWillDisplayLastCell:self];
         }

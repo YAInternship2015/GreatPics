@@ -7,8 +7,8 @@
 //
 
 #import "KVZLoginViewController.h"
-#import "KVZCollectionViewController.h"
 #import "AFNetworking.h"
+#import "KVZTokenFinder.h"
 
 static NSString *const INSTAGRAM_AUTH_URL = @"https://api.instagram.com/oauth/authorize/?";
 static NSString *const INSTAGRAM_REDIRECT_URI = @"https://yalantis.com";
@@ -17,26 +17,20 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
 
 @interface KVZLoginViewController () <UIWebViewDelegate>
 
-@property (nonatomic, strong) KVZCollectionViewController *collectionController;
-@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (nonatomic, copy) KVZLoginCompletionBlock completionBlock;
 
 @end
-
 
 @implementation KVZLoginViewController
 
 #pragma mark - Main
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-#warning логин контроллер ничего не должен знать о collectionController'е
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        KVZCollectionViewController *collectionController = (KVZCollectionViewController *)[sb instantiateViewControllerWithIdentifier:@"collectionViewController"];
-        self.collectionController = collectionController;
-        self.delegate = collectionController;
-    }
-    return self;
++ (KVZLoginViewController *)loginControllerWithCompletionBlock:(KVZLoginCompletionBlock)completionBlock{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    KVZLoginViewController *loginController = [sb instantiateViewControllerWithIdentifier:NSStringFromClass(self)];
+    loginController.completionBlock = completionBlock;
+    return loginController;
 }
 
 -(void) viewDidLoad {
@@ -48,9 +42,6 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
 #pragma mark - Login
 
 - (void)login {
-#warning зачем это?
-   [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
-    
     NSString *urlString = [NSString stringWithFormat:@"%@client_id=%@&redirect_uri=%@&response_type=token", INSTAGRAM_AUTH_URL, INSTAGRAM_CLIENT_ID, INSTAGRAM_REDIRECT_URI];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -61,47 +52,14 @@ static NSString *const INSTAGRAM_CLIENT_ID  = @"ffce67cce0814cb996eef468646cf08f
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSString *urlString = request.URL.absoluteString;
-    [self checkForAccessToken:urlString];
-    return YES;
-}
-
-#pragma mark - Helper functions
-
-#warning этот метод надо вынести в отдельный класс-хелпер
-- (void)checkForAccessToken:(NSString *)urlString {
-    if ([urlString rangeOfString:@"#access_token="].location != NSNotFound) {
-        NSArray* array = [urlString componentsSeparatedByString:@"#"];
-        
-        if ([array count] > 1) {
-            urlString = [array lastObject];
+    NSString *accessToken = [KVZTokenFinder accessTokenAfterCheck:urlString];
+    if (accessToken.length != 0) {
+        if (self.completionBlock) {
+        self.completionBlock(accessToken);
         }
-            NSArray* values = [urlString componentsSeparatedByString:@"="];
-            if ([values count] == 2) {
-                NSString* key = [values firstObject];
-                
-                if ([key isEqualToString:@"access_token"]) {
-                    NSString *accessToken = [values lastObject];
-                    
-                    if (accessToken) {
-                        if ([self.delegate respondsToSelector:@selector(loginViewController:didAccessWithToken:)]) {
-                            [self.delegate loginViewController:self didAccessWithToken:accessToken];
-                            [self showCollectionController];
-                    }
-                }
-            }
-        }
+        return NO;
     }
-}
-
-#warning эта логика перехода не должны быть в логин контроллере
-- (void)showCollectionController {
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
-    
-    UIViewController* mainVC = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
-    [mainVC presentViewController:self.collectionController
-                         animated:YES
-                       completion:nil];
+    return YES;
 }
 
 @end

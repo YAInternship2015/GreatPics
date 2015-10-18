@@ -1,83 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xg2-UB-7ws">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="yOx-6h-3TQ">
-            <objects>
-                <navigationController id="9jd-lg-Pe1" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qg1-E4-936">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="8ad-dZ-ApU" kind="relationship" relationship="rootViewController" id="57A-Xs-xX8"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pfk-Z3-ssp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-393" y="334"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="FQq-c5-6YK">
-            <objects>
-                <navigationController storyboardIdentifier="loginNavigationController" id="xg2-UB-7ws" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="P1F-r1-XsV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Uqe-mH-3z8" kind="relationship" relationship="rootViewController" id="g9P-an-uSu"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cfi-ap-8t0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-649" y="992"/>
-        </scene>
         <!--loginViewController-->
-        <scene sceneID="QtQ-co-CjY">
+        <scene sceneID="dxA-VT-Y03">
             <objects>
-                <viewController storyboardIdentifier="loginViewController" title="loginViewController" id="Uqe-mH-3z8" customClass="KVZLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KVZLoginViewController" title="loginViewController" id="hC8-JA-vnq" customClass="KVZLoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FAp-9q-RuJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="ygf-0w-Bev"/>
+                        <viewControllerLayoutGuide type="top" id="OkY-87-7ow"/>
+                        <viewControllerLayoutGuide type="bottom" id="y2S-QL-Xg3"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lQr-dm-MOW">
+                    <view key="view" contentMode="scaleToFill" id="v1U-8j-pl6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Am1-TV-O0A">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ep-hF-HG6">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Am1-TV-O0A" secondAttribute="trailing" id="CxE-jP-WcM"/>
-                            <constraint firstItem="Am1-TV-O0A" firstAttribute="top" secondItem="lQr-dm-MOW" secondAttribute="top" id="DbX-d3-qeD"/>
-                            <constraint firstItem="Am1-TV-O0A" firstAttribute="bottom" secondItem="ygf-0w-Bev" secondAttribute="top" id="O12-Wc-YKi"/>
-                            <constraint firstItem="Am1-TV-O0A" firstAttribute="leading" secondItem="lQr-dm-MOW" secondAttribute="leading" id="cJO-sq-gZy"/>
+                            <constraint firstItem="0ep-hF-HG6" firstAttribute="leading" secondItem="v1U-8j-pl6" secondAttribute="leading" id="Jec-rf-3Ze"/>
+                            <constraint firstAttribute="trailing" secondItem="0ep-hF-HG6" secondAttribute="trailing" id="WRt-xI-FKH"/>
+                            <constraint firstItem="0ep-hF-HG6" firstAttribute="top" secondItem="v1U-8j-pl6" secondAttribute="top" id="cCG-Zt-645"/>
+                            <constraint firstItem="0ep-hF-HG6" firstAttribute="bottom" secondItem="y2S-QL-Xg3" secondAttribute="top" id="unA-ak-a2b"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="rE9-MQ-yvG">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="o18-sT-dJb">
-                            <connections>
-                                <action selector="closeTapped:" destination="Uqe-mH-3z8" id="7dX-JL-cJ9"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="IIr-CO-RAf"/>
                     <connections>
-                        <outlet property="webView" destination="Am1-TV-O0A" id="ksl-s4-EVU"/>
+                        <outlet property="webView" destination="0ep-hF-HG6" id="FwE-9g-hbn"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OMI-xJ-itb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9AR-Pz-aWL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32" y="992"/>
+            <point key="canvasLocation" x="-177" y="986"/>
         </scene>
         <!--collectionViewController-->
         <scene sceneID="pzY-f3-kOT">
             <objects>
-                <collectionViewController storyboardIdentifier="collectionViewController" title="collectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8ad-dZ-ApU" customClass="KVZCollectionViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="KVZCollectionViewController" title="collectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8ad-dZ-ApU" customClass="KVZCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="prototypes" id="jQO-NX-ugT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,11 +82,14 @@
                             <outlet property="delegate" destination="8ad-dZ-ApU" id="4ph-qN-Lp7"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="BuY-Cu-rI8"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Great Pics" id="BuY-Cu-rI8"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8XU-Be-jkq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="417" y="334"/>
+            <point key="canvasLocation" x="-177" y="321"/>
         </scene>
     </scenes>
 </document>

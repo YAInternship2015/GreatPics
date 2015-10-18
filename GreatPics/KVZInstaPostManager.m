@@ -37,6 +37,7 @@
             if (![fetchedObjectsDictionary objectForKey:[postDictionary valueForKey:@"id"]]) {
                 post = [NSEntityDescription insertNewObjectForEntityForName:@"KVZInstaPost"
                                                      inManagedObjectContext:[self managedObjectContext]];
+                post.createdAtDate = [NSDate date];
             } else {
                 post = [fetchedObjectsDictionary objectForKey:[post valueForKey:@"id"]];
             }

@@ -10,13 +10,10 @@
 
 @interface KVZServerManager : NSObject
 
-+ (KVZServerManager *)sharedManager;
+@property (nonatomic, strong) NSString *accessToken;
 
-- (void)recentPostsForTagName:(NSString *)tagName
-                        count:(NSUInteger)count
-                     maxTagID:(NSString *)maxTagID
-                  accessToken:(NSString *)accessToken
-                    onSuccess:(void(^)(id responseObject))success
-                    onFailure:(void(^)(NSError *error))failure;
++ (KVZServerManager *)sharedManager;
+- (void)loadFirstPageOfPosts;
+- (void)loadNextPageOfPosts;
 
 @end

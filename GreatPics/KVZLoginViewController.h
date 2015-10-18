@@ -8,16 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class KVZLoginViewController;
+typedef void(^KVZLoginCompletionBlock)(NSString* accessToken);
 
-@protocol KVZLoginViewControllerDelegate <NSObject>
+@interface KVZLoginViewController : UIViewController
 
-- (void)loginViewController:(KVZLoginViewController *)controller didAccessWithToken:(NSString *)token;
-
-@end
-
-@interface KVZLoginViewController : UIViewController 
-
-@property (nonatomic, weak) id <KVZLoginViewControllerDelegate> delegate;
++ (KVZLoginViewController *)loginControllerWithCompletionBlock:(KVZLoginCompletionBlock)completionBlock;
 
 @end

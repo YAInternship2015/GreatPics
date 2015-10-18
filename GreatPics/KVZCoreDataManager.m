@@ -10,13 +10,15 @@
 
 @interface KVZCoreDataManager ()
 
-@property (readwrite, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
 
 @implementation KVZCoreDataManager
+
+#pragma mark - Class
 
 + (KVZCoreDataManager *)sharedManager {
     static KVZCoreDataManager *manager = nil;
